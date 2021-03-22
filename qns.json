@@ -1,6 +1,0 @@
-
-
-data =  '[{"id" : 1,"Question" : "What does HTML stand for?","a" : "HyperTextMarkup Language", "b" : "HelloText Markup Langauge","c" : "HyperText Money Language"}]';
-
-    data = '[{"name" : "Ashwin", "age" : "20"},{"name" : "Abhinandan", "age" : "20"}]';
-
