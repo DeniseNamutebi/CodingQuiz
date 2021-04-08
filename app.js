@@ -11,29 +11,55 @@ const data = [
       "c": "HyperText Money Language",
     },
     "answer": "a"
+  }, 
+  {
+      "id": 2,
+      "Question": "How do you put 'Hello World' on the computer screen in Javascript? ",
+      "options": {
+          "d": "print ('Hello World')",
+          "e": "console.log('Hello World')",
+          "f": "write (Hello World)"
+      },
+      "answer" : "e"
   }
 ];
+
 // Variables = Accessing DOM
 const qnNum = document.getElementById("qn-number");
 const qn = document.getElementById("qn");
+let correctScore = 0;
+let incorrectScore = 0;
 
-qnNum.innerHTML = data[0]["id"];
-qn.innerHTML = data[0]["Question"];
-const optionInput = data[0]["options"];
-//const eachOption = document.querySelectorAll(".option")
+let state = 0;
+
+
+qnNum.innerHTML = data[`${state}`]["id"];
+qn.innerHTML = data[`${state}`]["Question"];
+let optionInput = data[`${state}`]["options"];
 
 let optionArray = "";
 
-/* // Creates HTML elements which are the options to the question 
-for (const [key, value] of Object.entries(optionInput)) {
-  optionArray += `<div class="option" onclick="correctAnswer(this.id)" id="${key}"><input type="radio" name="option" class="option" value="${key}" > ${value}</input></div> `;
-  
-}
-document.querySelector("#quizContainer").innerHTML = optionArray;
 
-document.addEventListener("click", function (e) {
-    //console.log(e.target)
-}) */
+function nextQuestion() {
+    if (state <= 4){
+        state += 1
+        console.log(state)
+    }
+    qnNum.innerHTML = data[`${state}`]["id"];
+    qn.innerHTML = data[`${state}`]["Question"];
+    //optionInput = data[`${state}`]["options"];
+ }
+  
+
+function startTimer () {
+    let start = performance.now()
+    console.log(start)
+    // let minutes = Maths.floor(performance.now / 60000);
+    // let seconds = ((performance.now % 60000) / 1000 ).toFixed(0);
+    // console.log(minutes + ":" + (seconds < 10? "0" : " ") + seconds) ;
+} 
+
+
 
 // Creates HTML elements which are the options to the question 
 for (const [key, value] of Object.entries(optionInput)) {
@@ -47,20 +73,17 @@ document.querySelector("#quizContainer").innerHTML = optionArray;
 
 // Selecting the correct/wrong answer and adding colour
 function correctAnswer (id){
-     /* document.querySelector(".option").click(function(event){
-         event.preventDefault()
-         console.log(document.querySelector(".option"));  
-          
-        } 
-    ) */
-   
-    if (id === data[0]["answer"]){
+
+    if (id === data[`${state}`]["answer"]){
         document.getElementById(id).style.backgroundColor = "green"
-        //console.log(document.getElementById(id))
+        correctScore += 1
+        console.log(correctScore)
+
         
     }
     else{ 
         document.getElementById(id).style.backgroundColor = "red"
+        incorrectScore += 1
         }  
 }
 
@@ -73,16 +96,11 @@ function disableBtns (event){
 console.log('hello');
 $(".option").prop('disabled', true);
 $(".radio").prop('disabled', true);
-
-//document.querySelector(".option").disabled = true
-//document.querySelector(".option").disabled = true
 }
-/* function selectOnlyThis(id) {
-  for (let i = 1; i < optionInput.length; i++) {
-    document.getElementById(i).checked = false;
-  }
-  document.getElementById(id).checked = true;
-} */
+
+
+
+
 
 /* function functionCaller (id){
     //selectOnlyThis(id)
@@ -90,12 +108,3 @@ $(".radio").prop('disabled', true);
 } */
 
 
-
-
-
-
-
-
-
-//Convert html collect to an array
-// const optionInput = [].slice.call(document.getElementsByClassName("option"))
