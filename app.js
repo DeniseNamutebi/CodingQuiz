@@ -21,7 +21,37 @@ const data = [
           "f": "write (Hello World)"
       },
       "answer" : "e"
-  }
+  },
+  {
+    "id": 3,
+    "Question": "Inside which HTML Element do you add your Javascript Code? ",
+    "options": {
+        "g": "&lt;JS&gt;",
+        "h": "&lt;javaScript&gt;",
+        "i": "&lt;script&gt;"
+    },
+    "answer" : "i"
+},
+{
+  "id": 4,
+  "Question": "How do you create a function in JavaScript?",
+  "options": {
+      "j": "function = myFunction()",
+      "k": "function myFunction()",
+      "l": "function:myFunction()"
+  },
+  "answer" : "k"
+},
+{
+  "id": 5,
+  "Question": "How do you call a function named 'myFunction'",
+  "options": {
+      "m": "myFunction()",
+      "n": "call myFunction()",
+      "o": "Function = myFunction()"
+  },
+  "answer" : "m"
+}
 ];
 
 // Variables = Accessing DOM
@@ -29,76 +59,85 @@ const qnNum = document.getElementById("qn-number");
 const qn = document.getElementById("qn");
 let correctScore = 0;
 let incorrectScore = 0;
-
 let state = 0;
-
-
-qnNum.innerHTML = data[`${state}`]["id"];
-qn.innerHTML = data[`${state}`]["Question"];
 let optionInput = data[`${state}`]["options"];
-
 let optionArray = "";
 
+//Changing the Inner HTML of our question and qn Number to current postioning in data
+qnNum.innerHTML = data[`${state}`]["id"];
+qn.innerHTML = data[`${state}`]["Question"];
 
-function nextQuestion() {
-    if (state <= 4){
-        state += 1
-        console.log(state)
-    }
-    qnNum.innerHTML = data[`${state}`]["id"];
-    qn.innerHTML = data[`${state}`]["Question"];
-    //optionInput = data[`${state}`]["options"];
- }
-  
 
 function startTimer () {
-    let start = performance.now()
-    console.log(start)
-    // let minutes = Maths.floor(performance.now / 60000);
-    // let seconds = ((performance.now % 60000) / 1000 ).toFixed(0);
-    // console.log(minutes + ":" + (seconds < 10? "0" : " ") + seconds) ;
+  let start = performance.now()
+  console.log(start)
+  // let minutes = Maths.floor(performance.now / 60000);
+  // let seconds = ((performance.now % 60000) / 1000 ).toFixed(0);
+  // console.log(minutes + ":" + (seconds < 10? "0" : " ") + seconds) ;
 } 
-
-
-
-// Creates HTML elements which are the options to the question 
-for (const [key, value] of Object.entries(optionInput)) {
-  optionArray += `<button class="option" onClick="correctAnswer(this.id)" id="${key}" value="${key}">
-                    <input type="radio" class="radio" name="radio"></input>${value}
-                    </button> `;
-  
-}
-document.querySelector("#quizContainer").innerHTML = optionArray;
-
 
 // Selecting the correct/wrong answer and adding colour
 function correctAnswer (id){
-
-    if (id === data[`${state}`]["answer"]){
-        document.getElementById(id).style.backgroundColor = "green"
-        correctScore += 1
-        console.log(correctScore)
-
-        
-    }
-    else{ 
-        document.getElementById(id).style.backgroundColor = "red"
-        incorrectScore += 1
-        }  
+  
+  if (id === data[`${state}`]["answer"]){
+    document.getElementById(id).style.backgroundColor = "green"
+    correctScore += 1
+    console.log(correctScore)
+    
+    
+  }
+  else{ 
+    document.getElementById(id).style.backgroundColor = "red"
+    incorrectScore += 1
+  }  
 }
+
+function disableBtns (event){
+  console.log('hello');
+  $(".option").prop('disabled', true);
+  $(".radio").prop('disabled', true);
+}
+
+function nextQuestion() {
+    if (state < 4){
+        state += 1
+        console.log(state)
+        qnNum.innerHTML = data[`${state}`]["id"];
+        qn.innerHTML = data[`${state}`]["Question"];
+        optionInput = data[`${state}`]["options"];
+        optionArray = ""
+        for (let [key, value] of Object.entries(optionInput)) {
+          optionArray += `<button class="option" onClick="correctAnswer(this.id)" id="${key}" value="${key}">
+          <input type="radio" class="radio" name="radio"></input>${value}
+          </button> `;
+          
+        } 
+    } else {
+      document.getElementById('next-btn').style.display ='none'
+      console.log('what');
+      console.log(state)
+    }
+    
+    document.querySelector("#quizContainer").innerHTML = optionArray;
+   
+
+ }
+
+
 
 //Disabling buttons when an answer as been selected
 document.querySelectorAll(".option").forEach(function(eachElement){
   eachElement.addEventListener("click", disableBtns)
 }) 
 
-function disableBtns (event){
-console.log('hello');
-$(".option").prop('disabled', true);
-$(".radio").prop('disabled', true);
+// Creates HTML elements which are the options to the question 
+for (let [key, value] of Object.entries(optionInput)) {
+  optionArray += `<button class="option" onClick="correctAnswer(this.id)" id="${key}" value="${key}">
+                    <input type="radio" class="radio" name="radio"></input>${value}
+                    </button> `;
+  
 }
-
-
+document.querySelector("#quizContainer").innerHTML = optionArray;
 
 
 
