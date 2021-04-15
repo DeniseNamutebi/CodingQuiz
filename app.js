@@ -57,11 +57,14 @@ const data = [
 // Variables = Accessing DOM
 const qnNum = document.getElementById("qn-number");
 const qn = document.getElementById("qn");
-let correctScore = 0;
+let correctScore =  0;
 let incorrectScore = 0;
 let state = 0;
 let optionInput = data[`${state}`]["options"];
 let optionArray = "";
+
+
+
 
 //Changing the Inner HTML of our question and qn Number to current postioning in data
 qnNum.innerHTML = data[`${state}`]["id"];
@@ -81,14 +84,14 @@ function correctAnswer (id){
   
   if (id === data[`${state}`]["answer"]){
     document.getElementById(id).style.backgroundColor = "green"
-    correctScore += 1
+    correctScore ++
     console.log(correctScore)
     
     
   }
   else{ 
     document.getElementById(id).style.backgroundColor = "red"
-    incorrectScore += 1
+    incorrectScore ++
   }  
 }
 
@@ -99,24 +102,24 @@ function disableBtns (event){
 }
 
 function nextQuestion() {
-    if (state < 4){
-        state += 1
-        console.log(state)
-        qnNum.innerHTML = data[`${state}`]["id"];
-        qn.innerHTML = data[`${state}`]["Question"];
-        optionInput = data[`${state}`]["options"];
-        optionArray = ""
-        for (let [key, value] of Object.entries(optionInput)) {
-          optionArray += `<button class="option" onClick="correctAnswer(this.id)" id="${key}" value="${key}">
-          <input type="radio" class="radio" name="radio"></input>${value}
-          </button> `;
-          
+  state ++
+    qnNum.innerHTML = data[`${state}`]["id"];
+    qn.innerHTML = data[`${state}`]["Question"];
+    optionInput = data[`${state}`]["options"];
+    optionArray = ""
+    for (let [key, value] of Object.entries(optionInput)) {
+      optionArray += `<button class="option" onClick="correctAnswer(this.id)" id="${key}" value="${key}">
+      <input type="radio" class="radio" name="radio"></input>${value}
+      </button> `;
+  
+  if (state === 4){
+      document.getElementById('next-btn').style.display = 'none'
+      document.getElementById('finish-btn').style.display = 'block'
         } 
-    } else {
-      document.getElementById('next-btn').style.display ='none'
-      console.log('what');
-      console.log(state)
     }
+    /* else {
+    console.log('error'); }*/
+    
     
     document.querySelector("#quizContainer").innerHTML = optionArray;
    
@@ -139,7 +142,7 @@ for (let [key, value] of Object.entries(optionInput)) {
 }
 document.querySelector("#quizContainer").innerHTML = optionArray;
 
-
+document.getElementById('qns-right').innerHTML = correctScore
 
 /* function functionCaller (id){
     //selectOnlyThis(id)

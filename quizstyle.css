@@ -23,3 +23,7 @@ button{
     background-color: transparent;
     margin-top: 20px;
 }
+
+#finish-btn {
+    display: none;
+  }
