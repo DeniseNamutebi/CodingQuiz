@@ -27,3 +27,7 @@ button{
 #finish-btn {
     display: none;
   }
+
+#quiz-container-results{
+  display: none;
+}

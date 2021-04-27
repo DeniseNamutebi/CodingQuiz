@@ -13,20 +13,27 @@
          <div>
              <p id="qn-number">1</p>
          </div>
-
          <div id="timer"></div>  
+         <p id="qn"></p> 
         </div>
         <div class="middle-sec">
-            <div>
-              <p id="qn"></p>  
-            </div>
+            
         <div id="quizContainer">
         </div>
         <div class="bottom-sec">
             <button id="next-btn" onclick="nextQuestion()"> Next </button>
-            <a href="/results.html"><button id="finish-btn" onclick="nextQuestion()">Finish </button></a>
+            <button id="finish-btn" onclick ="displayResults()">Finish</button> 
         </div>
-        
+        <div id="quiz-container-results">
+            <div class="header">
+                <h1>Results</h1> 
+             <p id="results-para">Well done on completing the quiz!!!</p>  
+              </div>
+              <div class="results">
+                  <p id="qns-right"></p>
+                  <p id="qns-wrong"></p>
+              </div>
+        </div>
     </div>
     <script src="app.js"></script>
     

@@ -1,1 +1,0 @@
-document.getElementById('qns-right').innerHTML = correctScore;

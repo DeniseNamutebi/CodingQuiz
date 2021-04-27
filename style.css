@@ -35,3 +35,14 @@ color: lime;
 
 }
 
+#instructions{
+  display: none;
+  position: absolute;
+  border: 1px black solid;
+  background-color: white;
+  z-index: 1;
+  top: 10em;
+  left: 9rem;
+  cursor: pointer;
+
+}
